@@ -81,7 +81,7 @@ contract NFTMarketplace {
             revert NFTMarketplace__PriceNotMatched(nftAddress, tokenId, listing.price);
         }
 
-        s_proceeds[msg.sender] += msg.value;
+        s_proceeds[listing.seller] += msg.value;
         delete s_listings[nftAddress][tokenId];
         IERC721(nftAddress).safeTransferFrom(listing.seller, msg.sender, tokenId);
         emit ItemBought(msg.sender, nftAddress, tokenId, msg.value);
@@ -165,8 +165,8 @@ contract NFTMarketplace {
     {
         return s_listings[nftAddress][tokenId];
     }
-}
 
-// 1. Functions of the NFT marketplace
-//     1. Listing an item
-//     2. Buying an item
+    function getProceeds(address nftAddress) external view returns (uint256) {
+        return s_proceeds[nftAddress];
+    }
+}
