@@ -1,4 +1,5 @@
-const { ethers } = require("hardhat");
+const { ethers, network } = require("hardhat");
+const { moveBlocks } = require("../utils/move-blocks");
 
 async function mindAndListNft() {
     const nftmarketplace = await ethers.getContract("NFTMarketplace");
@@ -21,6 +22,10 @@ async function mindAndListNft() {
     );
     await listTx.wait(1);
     console.log("Listed!");
+
+    if (network.config.chainId == "31337") {
+        await moveBlocks(1, 1000);
+    }
 }
 
 mindAndListNft()
