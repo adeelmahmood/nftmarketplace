@@ -17,7 +17,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
     if (!developmentChains.includes(network.name) && process.env.ETHER_SCAN_KEY) {
         log("Verifying...");
-        await verify(nftmarketplace.address, arguments);
+        await verify(sampleNft.address, arguments);
     }
     log("------------------------------------------");
 };

@@ -9,6 +9,8 @@ async function mindAndListNft() {
     const mintTx = await sampleNft.mintNft();
     const mintReceipt = await mintTx.wait(1);
     const tokenId = mintReceipt.events[0].args.tokenId;
+    const tokenUri = await sampleNft.tokenURI(tokenId);
+    console.log(`NFT token URI ${tokenUri}`);
 
     console.log("Approving for marketplace...");
     const approveTx = await sampleNft.approve(nftmarketplace.address, tokenId);

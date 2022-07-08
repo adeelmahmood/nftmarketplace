@@ -22,11 +22,12 @@ contract SampleNft is ERC721 {
         s_tokenId += 1;
     }
 
-    function getTokenId() public view returns (uint256) {
+    function tokenId() public view returns (uint256) {
         return s_tokenId;
     }
 
-    function getTokenUri() public view returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         return s_tokenUri;
     }
 }
